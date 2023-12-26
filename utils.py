@@ -265,9 +265,9 @@ def set_target(df: pd.DataFrame):
     target_lst = []
     for idx, row in df.iterrows():
         if idx+1 == df.shape[0]:
-            target = row['Close']
+            target = row.pop(0)
         else:
-            target = df.iloc[idx+1]['Close']
+            target = df.iloc[idx+1]['Close'].pop(1)
         target_lst.append(target)
     
     targets = pd.Series(target_lst)
