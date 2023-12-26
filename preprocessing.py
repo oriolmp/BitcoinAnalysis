@@ -27,10 +27,9 @@ for file in os.listdir(DATA_PATH):
         os.makedirs(PREPROCESS_DATA_PATH)
 
     df = pd.read_csv(csv_path)
+    df['Date'] = pd.to_datetime(df['Date'], format='%Y-%M-%d')
 
     for indicator in INDICATORS:
         df = indicator(df)
-    df = df.drop('Adj Close', axis=1)
-    
-    df = set_target(df)
+    df = df.drop('Adj Close', axis=1)    
     df.to_csv(preprocessed_csv_path, index=False)
